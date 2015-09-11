@@ -10,6 +10,6 @@ func TestPlus(t *testing.T) {
 	result := Plus(n, m)
 
 	if result != n+m {
-		t.Errorf("error plus value: %s", result)
+		t.Errorf("error plus value: %d", result)
 	}
 }
