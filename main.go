@@ -12,5 +12,5 @@ func main() {
 
 // Plus is adding two arguments.
 func Plus(n, m int) int {
-	return n + m + 1
+	return n + m
 }
