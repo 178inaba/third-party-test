@@ -1,13 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
+
+const (
+	exitOk = iota
+)
 
 func main() {
+	os.Exit(run())
+}
+
+func run() int {
 	n := 1
 	m := 2
 	result := Plus(n, m)
 
 	fmt.Println(n, " + ", m, " = ", result)
+
+	return exitOk
 }
 
 // Plus is adding two arguments.
