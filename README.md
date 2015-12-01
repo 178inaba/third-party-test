@@ -1,5 +1,7 @@
 # third_test
 
+[![Join the chat at https://gitter.im/178inaba/third_test](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/178inaba/third_test?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 third_test is testing of third party ci service
 
 ## test and coverage badges
