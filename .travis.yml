@@ -7,4 +7,4 @@ go:
 before_install:
   - go get -u -v github.com/mattn/goveralls
 script:
-  - $HOME/gopath/bin/goveralls -v
+  - $HOME/gopath/bin/goveralls
