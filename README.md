@@ -1,5 +1,7 @@
 # Third Test
 
+[![Join the chat at https://gitter.im/third-test/Lobby](https://badges.gitter.im/third-test/Lobby.svg)](https://gitter.im/third-test/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Third Test is testing of third party ci service.
 
 ## Badges
