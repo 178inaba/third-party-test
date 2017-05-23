@@ -1,6 +1,6 @@
 # Third Test
 
-[![Join the chat at https://gitter.im/178inaba/third_test](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/178inaba/third_test?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/178inaba/third-test](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/178inaba/third-test?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Third Test is testing of third party ci service.
 
@@ -10,19 +10,19 @@ Third Test is testing of third party ci service.
 
 | Travis CI | CircleCI |
 |:--:|:--:|
-| [![Build Status](https://travis-ci.org/178inaba/third_test.svg?branch=master)](https://travis-ci.org/178inaba/third_test) | [![Circle CI](https://circleci.com/gh/178inaba/third_test.svg?style=svg)](https://circleci.com/gh/178inaba/third_test) |
+| [![Build Status](https://travis-ci.org/178inaba/third-test.svg?branch=master)](https://travis-ci.org/178inaba/third-test) | [![Circle CI](https://circleci.com/gh/178inaba/third-test.svg?style=svg)](https://circleci.com/gh/178inaba/third-test) |
 
 ### Coverage
 
 | Coveralls |
 |:--:|
-| [![Coverage Status](https://coveralls.io/repos/178inaba/third_test/badge.svg?branch=master&service=github)](https://coveralls.io/github/178inaba/third_test?branch=master) |
+| [![Coverage Status](https://coveralls.io/repos/178inaba/third-test/badge.svg?branch=master&service=github)](https://coveralls.io/github/178inaba/third-test?branch=master) |
 
 ### Other
 
 | Go Report Card |
 |:--:|
-| [![Go Report Card](https://goreportcard.com/badge/github.com/178inaba/third_test)](https://goreportcard.com/report/github.com/178inaba/third_test) |
+| [![Go Report Card](https://goreportcard.com/badge/github.com/178inaba/third-test)](https://goreportcard.com/report/github.com/178inaba/third-test) |
 
 ## License
 
