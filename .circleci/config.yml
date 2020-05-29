@@ -1,26 +1,53 @@
-# Golang CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-go/ for more details
 version: 2
-jobs:
-  build:
-    docker:
-      # specify the version
-      - image: circleci/golang:1.9
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-    #### TEMPLATE_NOTE: go expects specific checkout path representing url
-    #### expecting it in the form of
-    ####   /go/src/github.com/circleci/go-tool
-    ####   /go/src/bitbucket.org/circleci/go-tool
-    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+references:
+  test-steps: &test-steps
     steps:
       - checkout
+      - restore_cache:
+          name: Restore module caches
+          keys:
+            - go-modules-v1-{{ .Branch }}-{{ checksum "go.sum" }}
+            - go-modules-v1-{{ .Branch }}-
+            - go-modules-v1-
+      - run:
+          name: Install lint tools
+          command: make -s install-tools
+      - run:
+          name: Check Gofmt diff
+          command: make -s fmt-diff
+      - run:
+          name: Run GolangCI-Lint
+          command: make -s ci-lint
+      - run:
+          name: Run Golint
+          command: make -s lint
+      - run:
+          name: Run Vet
+          command: make -s vet
+      - run:
+          name: Test
+          command: make -s test
+      - save_cache:
+          name: Save module caches
+          key: go-modules-v1-{{ .Branch }}-{{ checksum "go.sum" }}
+          paths:
+            - /go/pkg/mod
 
-      # specify any bash command here prefixed with `run: `
-      - run: go get -v -t -d ./...
-      - run: go test -v ./...
+jobs:
+  test-1.13:
+    docker:
+      - image: circleci/golang:1.13
+    <<: *test-steps
+
+  test-1.14:
+    docker:
+      - image: circleci/golang:1.14
+    <<: *test-steps
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test-1.13
+      - test-1.14
