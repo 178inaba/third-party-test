@@ -1,49 +1,39 @@
 package main
 
 import (
-	"bytes"
-	"io"
+	"io/ioutil"
 	"os"
 	"testing"
 )
-
-func TestMain(m *testing.M) {
-	os.Exit(m.Run())
-}
 
 func TestRun(t *testing.T) {
 	so := os.Stdout
 	r, w, err := os.Pipe()
 	if err != nil {
-		t.Fatal("error os.Pipe():", err)
+		t.Fatalf("Should not be fail: %s.", err)
 	}
 	os.Stdout = w
 	defer func() { os.Stdout = so }()
 
-	run()
+	if got, want := run(), exitOK; got != want {
+		t.Fatalf("ExitStatus is %d, but want %d.", got, want)
+	}
+
 	w.Close()
+	stdoutBytes, err := ioutil.ReadAll(r)
+	if err != nil {
+		t.Fatalf("Should not be fail: %s.", err)
+	}
 
-	strCh := make(chan string)
-	go func() {
-		var buf bytes.Buffer
-		io.Copy(&buf, r)
-		strCh <- buf.String()
-	}()
-
-	result := <-strCh
-	answer := "1  +  2  =  3\n"
-	if result != answer {
-		t.Errorf("error print: %s", result)
+	if got, want := string(stdoutBytes), "1  +  2  =  3\n"; got != want {
+		t.Errorf("Stdout is %s, but want %s.", got, want)
 	}
 }
 
 func TestPlus(t *testing.T) {
 	n := 2
 	m := 3
-
-	result := Plus(n, m)
-
-	if result != n+m {
-		t.Errorf("error plus value: %d", result)
+	if got, want := Plus(n, m), n+m; got != want {
+		t.Errorf("Plus is %d, but want %d.", got, want)
 	}
 }
