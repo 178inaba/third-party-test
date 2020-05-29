@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	exitOk = iota
+	exitOK = iota
 )
 
 func main() {
@@ -20,7 +20,7 @@ func run() int {
 
 	fmt.Println(n, " + ", m, " = ", result)
 
-	return exitOk
+	return exitOK
 }
 
 // Plus is adding two arguments.
