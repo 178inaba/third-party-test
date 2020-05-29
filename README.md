@@ -10,7 +10,7 @@ Third Party Test is testing of third party ci service.
 
 | Travis CI | CircleCI |
 |:--:|:--:|
-| [![Build Status](https://travis-ci.org/178inaba/third-test.svg?branch=master)](https://travis-ci.org/178inaba/third-test) | [![CircleCI](https://circleci.com/gh/178inaba/third-party-test.svg?style=svg)](https://circleci.com/gh/178inaba/third-party-test) |
+| [![Build Status](https://travis-ci.org/178inaba/third-party-test.svg?branch=master)](https://travis-ci.org/178inaba/third-party-test) | [![CircleCI](https://circleci.com/gh/178inaba/third-party-test.svg?style=svg)](https://circleci.com/gh/178inaba/third-party-test) |
 
 ### Coverage
 
