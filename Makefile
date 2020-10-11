@@ -29,7 +29,7 @@ run:
 	go run main.go
 
 install-tools: go-get-tools
-	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $$(go env GOPATH)/bin v1.27.0
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $$(go env GOPATH)/bin v1.31.0
 
 go-get-tools:
 	GO111MODULE=off go get -u golang.org/x/lint/golint golang.org/x/tools/cmd/goimports
