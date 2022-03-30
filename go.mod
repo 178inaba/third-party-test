@@ -2,4 +2,4 @@ module github.com/178inaba/third-party-test
 
 go 1.14
 
-require github.com/stripe/stripe-go/v72 v72.93.0
+require github.com/stripe/stripe-go/v72 v72.98.0
