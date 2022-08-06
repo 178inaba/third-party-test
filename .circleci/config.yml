@@ -37,12 +37,12 @@ references:
 jobs:
   test-1.18:
     docker:
-      - image: circleci/golang:1.18
+      - image: cimg/go:1.18
     <<: *test-steps
 
   test-1.19:
     docker:
-      - image: circleci/golang:1.19
+      - image: cimg/go:1.19
     <<: *test-steps
 
 workflows:
