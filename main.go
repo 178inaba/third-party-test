@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	_ "github.com/stripe/stripe-go/v72"
+	_ "github.com/stripe/stripe-go/v73"
 )
 
 const (
