@@ -1,7 +1,7 @@
 package main
 
 import (
-	"io/ioutil"
+	"io"
 	"os"
 	"testing"
 )
@@ -20,7 +20,7 @@ func TestRun(t *testing.T) {
 	}
 
 	w.Close()
-	stdoutBytes, err := ioutil.ReadAll(r)
+	stdoutBytes, err := io.ReadAll(r)
 	if err != nil {
 		t.Fatalf("Should not be fail: %s.", err)
 	}
