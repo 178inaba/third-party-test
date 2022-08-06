@@ -35,19 +35,19 @@ references:
             - /go/pkg/mod
 
 jobs:
-  test-1.16:
+  test-1.18:
     docker:
-      - image: circleci/golang:1.16
+      - image: circleci/golang:1.18
     <<: *test-steps
 
-  test-1.17:
+  test-1.19:
     docker:
-      - image: circleci/golang:1.17
+      - image: circleci/golang:1.19
     <<: *test-steps
 
 workflows:
   version: 2
   test:
     jobs:
-      - test-1.16
-      - test-1.17
+      - test-1.18
+      - test-1.19
