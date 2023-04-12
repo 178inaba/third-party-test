@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 references:
   test-steps: &test-steps
@@ -32,19 +32,18 @@ references:
             - /go/pkg/mod
 
 jobs:
-  test-1.18:
-    docker:
-      - image: cimg/go:1.18
-    <<: *test-steps
-
   test-1.19:
     docker:
       - image: cimg/go:1.19
     <<: *test-steps
 
+  test-1.20:
+    docker:
+      - image: cimg/go:1.20
+    <<: *test-steps
+
 workflows:
-  version: 2
   test:
     jobs:
-      - test-1.18
       - test-1.19
+      - test-1.20
