@@ -8,9 +8,9 @@ Third Party Test is testing of third party ci service.
 
 ### Test
 
-| Travis CI | CircleCI | GitHub Actions |
-|:--:|:--:|:--:|
-| [![Build Status](https://travis-ci.org/178inaba/third-party-test.svg?branch=master)](https://travis-ci.org/178inaba/third-party-test) | [![CircleCI](https://circleci.com/gh/178inaba/third-party-test.svg?style=svg)](https://circleci.com/gh/178inaba/third-party-test) | [![Lint and Test](https://github.com/178inaba/third-party-test/workflows/Lint%20and%20Test/badge.svg)](https://github.com/178inaba/third-party-test/actions) |
+| CircleCI | GitHub Actions |
+|:--:|:--:|
+| [![CircleCI](https://circleci.com/gh/178inaba/third-party-test.svg?style=svg)](https://circleci.com/gh/178inaba/third-party-test) | [![Lint and Test](https://github.com/178inaba/third-party-test/workflows/Lint%20and%20Test/badge.svg)](https://github.com/178inaba/third-party-test/actions) |
 
 ### Coverage
 
