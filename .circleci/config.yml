@@ -32,12 +32,12 @@ references:
             - /go/pkg/mod
 
 jobs:
-  test-1.19:
+  test-119:
     docker:
       - image: cimg/go:1.19
     <<: *test-steps
 
-  test-1.20:
+  test-120:
     docker:
       - image: cimg/go:1.20
     <<: *test-steps
@@ -45,5 +45,5 @@ jobs:
 workflows:
   test:
     jobs:
-      - test-1.19
-      - test-1.20
+      - test-119
+      - test-120
