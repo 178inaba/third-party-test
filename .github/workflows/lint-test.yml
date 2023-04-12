@@ -42,6 +42,8 @@ jobs:
           go-version: ${{ matrix.go }}
       - name: GolangCI Lint
         uses: golangci/golangci-lint-action@v3
+        with:
+          skip-pkg-cache: true
 
   test:
     name: Test ${{ matrix.go }}
