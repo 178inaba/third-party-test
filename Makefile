@@ -28,5 +28,5 @@ run:
 install-tools: go-get-tools
 	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $$(go env GOPATH)/bin
 
-go-get-tools:
+go-install-tools:
 	go install golang.org/x/tools/cmd/goimports@latest
