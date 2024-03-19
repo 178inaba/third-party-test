@@ -3,23 +3,20 @@ name: Lint and Test
 on: push
 
 concurrency:
-  group: ${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   gofmt-vet:
-    name: Gofmt and Vet ${{ matrix.go }}
+    name: Gofmt and Vet
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        go: [ '1.19', '1.20' ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: ${{ matrix.go }}
+          go-version-file: go.mod
       - name: Install tools
         run: make -s go-install-tools
       - name: Run Gofmt diff
@@ -28,36 +25,30 @@ jobs:
         run: make -s vet
 
   golangci-lint:
-    name: GolangCI Lint ${{ matrix.go }}
+    name: GolangCI Lint
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        go: [ '1.19', '1.20' ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: ${{ matrix.go }}
+          go-version-file: go.mod
       - name: GolangCI Lint
         uses: golangci/golangci-lint-action@v4
         with:
-          version: v1.52.2
+          version: v1.56.2
           skip-pkg-cache: true
 
   test:
-    name: Test ${{ matrix.go }}
+    name: Test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        go: [ '1.19', '1.20' ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: ${{ matrix.go }}
+          go-version-file: go.mod
       - name: Test
         run: make -s test
