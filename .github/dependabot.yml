@@ -9,7 +9,7 @@ updates:
     reviewers:
       - "178inaba"
   - package-ecosystem: "github-actions"
-    directory: "/test-actions"
+    directory: "test-actions"
     schedule:
       interval: "daily"
     assignees:
