@@ -8,7 +8,7 @@ concurrency:
 
 jobs:
   gofmt-vet:
-    name: Gofmt and Vet ${{ matrix.go }}
+    name: Gofmt and Vet
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -25,7 +25,7 @@ jobs:
         run: make -s vet
 
   golangci-lint:
-    name: GolangCI Lint ${{ matrix.go }}
+    name: GolangCI Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -41,7 +41,7 @@ jobs:
           skip-pkg-cache: true
 
   test:
-    name: Test ${{ matrix.go }}
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
