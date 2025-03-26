@@ -10,7 +10,7 @@ func TestRun(t *testing.T) {
 	so := os.Stdout
 	r, w, err := os.Pipe()
 	if err != nil {
-		t.Fatalf("Should not be fail: %s.", err)
+		t.Fatalf("Should not fail: %v.", err)
 	}
 	os.Stdout = w
 	defer func() { os.Stdout = so }()
@@ -19,10 +19,13 @@ func TestRun(t *testing.T) {
 		t.Fatalf("ExitStatus is %d, but want %d.", got, want)
 	}
 
-	w.Close()
+	if err := w.Close(); err != nil {
+		t.Fatalf("Should not fail: %v.", err)
+	}
+
 	stdoutBytes, err := io.ReadAll(r)
 	if err != nil {
-		t.Fatalf("Should not be fail: %s.", err)
+		t.Fatalf("Should not fail: %v.", err)
 	}
 
 	if got, want := string(stdoutBytes), "1  +  2  =  3\n"; got != want {
