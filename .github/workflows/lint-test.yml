@@ -51,3 +51,12 @@ jobs:
           go-version-file: go.mod
       - name: Test
         run: make -s test
+
+  artifact:
+    name: Upload Artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upload Test Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          path: .github/workflows/index.html
