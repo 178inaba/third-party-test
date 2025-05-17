@@ -6,21 +6,15 @@ updates:
       interval: "daily"
     assignees:
       - "178inaba"
-    reviewers:
-      - "178inaba"
   - package-ecosystem: "github-actions"
     directory: "/test-actions"
     schedule:
       interval: "daily"
     assignees:
       - "178inaba"
-    reviewers:
-      - "178inaba"
   - package-ecosystem: "gomod"
     directory: "/"
     schedule:
       interval: "daily"
     assignees:
-      - "178inaba"
-    reviewers:
       - "178inaba"
