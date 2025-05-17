@@ -16,7 +16,7 @@ Third Party Test is testing of third party ci service.
 
 | Coveralls |
 |:--:|
-| [![Coverage Status](https://coveralls.io/repos/178inaba/third-test/badge.svg?branch=master&service=github)](https://coveralls.io/github/178inaba/third-test?branch=master) |
+| [![Coverage Status](https://coveralls.io/repos/178inaba/third-test/badge.svg?branch=main&service=github)](https://coveralls.io/github/178inaba/third-test?branch=main) |
 
 ### Other
 
