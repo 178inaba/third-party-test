@@ -7,9 +7,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  gofmt-vet:
-    name: Gofmt and Vet
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -17,27 +19,43 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
-      - name: Install tools
-        run: make -s go-install-tools
-      - name: Run Gofmt diff
-        run: make -s fmt-diff
-      - name: Run Vet
-        run: make -s vet
-
-  golangci-lint:
-    name: GolangCI Lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version-file: go.mod
+      - name: Run go mod tidy
+        run: make -s modtidy
+      - name: Run modernize
+        run: make -s modernize
+      - name: Get golangci-lint version
+        id: version
+        run: |
+          img_ref=$(cat compose.yaml | yq '.services.lint.image')
+          echo "version=${img_ref#*:}" >> $GITHUB_OUTPUT
       - name: GolangCI Lint
         uses: golangci/golangci-lint-action@v8
         with:
-          version: v2.1.6
+          version: ${{ steps.version.outputs.version }}
+          args: --fix
+      - name: Check for changes
+        id: check-changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "変更が検出されました:"
+            git status --porcelain
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "変更はありませんでした"
+          fi
+      - name: Commit and push changes
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit -m "Auto-fix: tidy, modernize, and lint
+
+          - go mod tidy
+          - modernize code
+          - lint fixes"
+          git push
 
   test:
     name: Test
