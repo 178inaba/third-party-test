@@ -20,7 +20,7 @@ func run() int {
 	m := 2
 	result := Plus(n, m)
 
-	fmt.Println(n  , " + ", m, " = ", result)
+	fmt.Println(n, " + ", m, " = ", result)
 
 	return exitOK
 }
