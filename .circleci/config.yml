@@ -40,14 +40,14 @@ jobs:
           paths:
             - /go/pkg/mod
 
-  test-latest:
-    docker:
-      - image: cimg/go:1.25
-    <<: *test-steps
-
   test-previous:
     docker:
       - image: cimg/go:1.24
+    <<: *test-steps
+
+  test-latest:
+    docker:
+      - image: cimg/go:1.25
     <<: *test-steps
 
 workflows:
