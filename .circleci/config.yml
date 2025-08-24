@@ -4,16 +4,12 @@ references:
   test-steps: &test-steps
     steps:
       - checkout
-      - setup_remote_docker
       - restore_cache:
           name: Restore module caches
           keys:
             - go-modules-v1-{{ .Branch }}-{{ checksum "go.sum" }}
             - go-modules-v1-{{ .Branch }}-
             - go-modules-v1-
-      - run:
-          name: Lint
-          command: make -s lint
       - run:
           name: Test
           command: make -s test
@@ -24,6 +20,26 @@ references:
             - /go/pkg/mod
 
 jobs:
+  lint:
+    machine:
+      image: ubuntu-2404:current
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore module caches
+          keys:
+            - go-modules-v1-{{ .Branch }}-{{ checksum "go.sum" }}
+            - go-modules-v1-{{ .Branch }}-
+            - go-modules-v1-
+      - run:
+          name: Lint
+          command: make -s lint
+      - save_cache:
+          name: Save module caches
+          key: go-modules-v1-{{ .Branch }}-{{ checksum "go.sum" }}
+          paths:
+            - /go/pkg/mod
+
   test-latest:
     docker:
       - image: cimg/go:1.25
@@ -37,5 +53,6 @@ jobs:
 workflows:
   test:
     jobs:
+      - lint
       - test-latest
       - test-previous
