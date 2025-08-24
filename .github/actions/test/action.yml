@@ -4,8 +4,6 @@ description: Run tests
 runs:
   using: composite
   steps:
-    - name: Checkout
-      uses: actions/checkout@v5
     - name: Setup Go
       uses: actions/setup-go@v5
       with:

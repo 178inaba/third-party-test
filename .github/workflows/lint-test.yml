@@ -56,6 +56,8 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v5
       - uses: ./.github/actions/test
 
   test-after-lint:
@@ -64,4 +66,6 @@ jobs:
     needs: lint
     if: ${{ needs.lint.outputs.has_changes }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v5
       - uses: ./.github/actions/test
