@@ -27,7 +27,5 @@ func run() int {
 
 // Plus is adding two arguments.
 func Plus(n, m int) int {
-	maps := map[string]any{}
-	fmt.Println(maps)
 	return n + m
 }
