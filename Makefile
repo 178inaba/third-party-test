@@ -1,32 +1,18 @@
-LOCAL_PACKAGE_PREFIX := github.com/178inaba/third-party-test
+.PHONY: all modtidy modernize lint test run
 
-.PHONY: all fmt fmt-diff ci-lint ci-lint-fix vet test run install-tools go-get-tools
+all: modtidy modernize lint test
 
-all: ci-lint-fix fmt ci-lint vet test
+modtidy:
+	go mod tidy
 
-fmt:
-	goimports -local '$(LOCAL_PACKAGE_PREFIX)' -w .
+modernize:
+	go run golang.org/x/tools/gopls/internal/analysis/modernize/cmd/modernize@latest -fix -test ./...
 
-fmt-diff:
-	test -z $$(goimports -local '$(LOCAL_PACKAGE_PREFIX)' -l .) || (goimports -local '$(LOCAL_PACKAGE_PREFIX)' -d . && exit 1)
-
-ci-lint:
-	golangci-lint run
-
-ci-lint-fix:
-	golangci-lint run --fix
-
-vet:
-	go vet ./...
+lint:
+	docker compose run --rm lint --fix
 
 test:
 	go test -race -count 1 -cover ./...
 
 run:
 	go run main.go
-
-install-tools: go-get-tools
-	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $$(go env GOPATH)/bin
-
-go-install-tools:
-	go install golang.org/x/tools/cmd/goimports@latest

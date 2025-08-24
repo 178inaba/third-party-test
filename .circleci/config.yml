@@ -11,18 +11,6 @@ references:
             - go-modules-v1-{{ .Branch }}-
             - go-modules-v1-
       - run:
-          name: Install tools
-          command: make -s install-tools
-      - run:
-          name: Check Gofmt diff
-          command: make -s fmt-diff
-      - run:
-          name: Run GolangCI-Lint
-          command: make -s ci-lint
-      - run:
-          name: Run Vet
-          command: make -s vet
-      - run:
           name: Test
           command: make -s test
       - save_cache:
@@ -32,18 +20,39 @@ references:
             - /go/pkg/mod
 
 jobs:
-  test-latest:
+  lint:
+    machine:
+      image: ubuntu-2404:current
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore module caches
+          keys:
+            - go-modules-v1-{{ .Branch }}-{{ checksum "go.sum" }}
+            - go-modules-v1-{{ .Branch }}-
+            - go-modules-v1-
+      - run:
+          name: Lint
+          command: make -s lint
+      - save_cache:
+          name: Save module caches
+          key: go-modules-v1-{{ .Branch }}-{{ checksum "go.sum" }}
+          paths:
+            - /go/pkg/mod
+
+  test-previous:
     docker:
       - image: cimg/go:1.24
     <<: *test-steps
 
-  test-previous:
+  test-latest:
     docker:
-      - image: cimg/go:1.23
+      - image: cimg/go:1.25
     <<: *test-steps
 
 workflows:
   test:
     jobs:
+      - lint
       - test-latest
       - test-previous

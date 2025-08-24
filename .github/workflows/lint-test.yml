@@ -7,37 +7,60 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  gofmt-vet:
-    name: Gofmt and Vet
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.AUTOFIX_BOT_APP_ID }}
+          private-key: ${{ secrets.AUTOFIX_BOT_PRIVATE_KEY }}
+      - name: Get user id
+        id: get-user-id
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: echo "user-id=$(gh api '/users/${{ steps.app-token.outputs.app-slug }}[bot]' --jq .id)" >> "${GITHUB_OUTPUT}"
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          token: ${{ steps.app-token.outputs.token }}
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
-      - name: Install tools
-        run: make -s go-install-tools
-      - name: Run Gofmt diff
-        run: make -s fmt-diff
-      - name: Run Vet
-        run: make -s vet
-
-  golangci-lint:
-    name: GolangCI Lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version-file: go.mod
+      - name: Run go mod tidy
+        run: make -s modtidy
+      - name: Run modernize
+        run: make -s modernize
+      - name: Get golangci-lint version
+        id: version
+        run: |
+          img_ref=$(cat compose.yaml | yq '.services.lint.image')
+          echo "version=${img_ref#*:}" >> "${GITHUB_OUTPUT}"
       - name: GolangCI Lint
         uses: golangci/golangci-lint-action@v8
         with:
-          version: v2.1.6
+          version: ${{ steps.version.outputs.version }}
+          args: --fix
+      - name: Check for changes
+        id: check-changes
+        run: if [ -n "$(git status --porcelain)" ]; then echo 'has_changes=true' >> "${GITHUB_OUTPUT}"; fi
+      - name: Commit and push changes
+        if: ${{ steps.check-changes.outputs.has_changes }}
+        run: |
+          git config user.name '${{ steps.app-token.outputs.app-slug }}[bot]'
+          git config user.email '${{ steps.get-user-id.outputs.user-id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com'
+          git add .
+          git commit -m "Auto-fix: tidy, modernize, and lint
+
+          - go mod tidy
+          - modernize code
+          - lint fixes"
+          git push
 
   test:
     name: Test
