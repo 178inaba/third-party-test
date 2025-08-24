@@ -1,6 +1,6 @@
 module github.com/178inaba/third-party-test
 
-go 1.25.0
+go 1.24.0
 
 require github.com/stripe/stripe-go/v73 v73.16.0
 
