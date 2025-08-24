@@ -4,6 +4,7 @@ references:
   test-steps: &test-steps
     steps:
       - checkout
+      - setup_remote_docker
       - restore_cache:
           name: Restore module caches
           keys:
