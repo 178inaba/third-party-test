@@ -16,7 +16,7 @@ func main() {
 }
 
 func run() int {
-	n := 1
+	n :=    1
 	m := 2
 	result := Plus(n, m)
 
