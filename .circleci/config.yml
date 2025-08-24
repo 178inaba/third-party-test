@@ -11,17 +11,8 @@ references:
             - go-modules-v1-{{ .Branch }}-
             - go-modules-v1-
       - run:
-          name: Install tools
-          command: make -s install-tools
-      - run:
-          name: Check Gofmt diff
-          command: make -s fmt-diff
-      - run:
-          name: Run GolangCI-Lint
-          command: make -s ci-lint
-      - run:
-          name: Run Vet
-          command: make -s vet
+          name: Lint
+          command: make -s lint
       - run:
           name: Test
           command: make -s test
@@ -34,12 +25,12 @@ references:
 jobs:
   test-latest:
     docker:
-      - image: cimg/go:1.24
+      - image: cimg/go:1.25
     <<: *test-steps
 
   test-previous:
     docker:
-      - image: cimg/go:1.23
+      - image: cimg/go:1.24
     <<: *test-steps
 
 workflows:
