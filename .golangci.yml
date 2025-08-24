@@ -8,7 +8,16 @@ linters:
 formatters:
   enable:
     - goimports
+    - gci
   settings:
     goimports:
       local-prefixes:
         - github.com/178inaba/third-party-test
+    gci:
+      sections:
+        - standard
+        - default
+        - blank
+        - dot
+        - alias
+        - localmodule
