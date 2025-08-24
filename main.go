@@ -16,8 +16,8 @@ func main() {
 }
 
 func run() int {
-	n :=          1
-	m :=          2
+	n := 1
+	m := 2
 	result := Plus(n, m)
 
 	fmt.Println(n, " + ", m, " = ", result)
