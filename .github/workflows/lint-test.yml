@@ -10,6 +10,7 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    if: ${{ github.actor != 'github-actions[bot]' }}
     permissions:
       contents: write
     outputs:
@@ -55,6 +56,7 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    if: ${{ github.actor != 'github-actions[bot]' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
