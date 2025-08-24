@@ -1,0 +1,14 @@
+version: "2"
+
+linters:
+  exclusions:
+    presets:
+      - std-error-handling
+
+formatters:
+  enable:
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/178inaba/third-party-test
