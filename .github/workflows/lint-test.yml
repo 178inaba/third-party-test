@@ -17,8 +17,8 @@ jobs:
         id: app-token
         uses: actions/create-github-app-token@v2
         with:
-          app-id: ${{ secrets.AUTOFIX_BOT_APP_ID }}
-          private-key: ${{ secrets.AUTOFIX_BOT_PRIVATE_KEY }}
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
       - name: Get user id
         id: get-user-id
         env:
