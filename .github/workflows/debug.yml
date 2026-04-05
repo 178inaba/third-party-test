@@ -1,0 +1,11 @@
+name: Debug
+
+on:
+  pull_request:
+
+jobs:
+  debug:
+    name: Debug 
+    runs-on: ubuntu-slim
+    steps:
+      - run: echo 'Debug'
