@@ -15,6 +15,7 @@ func main() {
 	os.Exit(run())
 }
 
+// TODO debug comments
 func run() int {
 	n := 1
 	m := 2
