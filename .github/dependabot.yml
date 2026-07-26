@@ -1,20 +1,22 @@
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: docker-compose
+    directory: /
     schedule:
-      interval: "daily"
+      interval: weekly
     assignees:
-      - "178inaba"
-  - package-ecosystem: "github-actions"
-    directory: "/test-actions"
+      - 178inaba
+  - package-ecosystem: github-actions
+    directories:
+      - /
+      - /test-actions
     schedule:
-      interval: "daily"
+      interval: weekly
     assignees:
-      - "178inaba"
-  - package-ecosystem: "gomod"
-    directory: "/"
+      - 178inaba
+  - package-ecosystem: gomod
+    directory: /
     schedule:
-      interval: "daily"
+      interval: weekly
     assignees:
-      - "178inaba"
+      - 178inaba
