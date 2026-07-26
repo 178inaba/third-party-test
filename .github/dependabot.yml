@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: docker-compose
     directory: /
     schedule:
-      interval: weekly
+      interval: daily
     assignees:
       - 178inaba
   - package-ecosystem: github-actions
@@ -11,12 +11,12 @@ updates:
       - /
       - /test-actions
     schedule:
-      interval: weekly
+      interval: daily
     assignees:
       - 178inaba
   - package-ecosystem: gomod
     directory: /
     schedule:
-      interval: weekly
+      interval: daily
     assignees:
       - 178inaba
